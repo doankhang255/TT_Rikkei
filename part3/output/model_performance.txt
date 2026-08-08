@@ -1,0 +1,13 @@
+=== Part 3: Predictive Analysis - Model Performance ===
+
+Train rows: 33260, Test rows: 8316
+y_test mean: 21.26, y_test std: 298.08
+
+--- random_forest ---
+RMSE: 257.25
+R2 Score: 0.2551
+
+--- xgboost ---
+RMSE: 257.13
+R2 Score: 0.2558
+

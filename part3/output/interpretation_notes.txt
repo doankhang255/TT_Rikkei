@@ -1,0 +1,21 @@
+=== Part 3: Interpretation notes (Random Forest vs. XGBoost) ===
+
+Better model by RMSE: xgboost (RMSE=257.13, R2=0.2558)
+
+--- random_forest ---
+RMSE=257.25, R2=0.2551
+Top 5 predictors: review_counts, date_created, price, original_price, number_of_images
+sub_category rank: #6 of 14 (importance=0.0109) - NOT in top 5
+
+--- xgboost ---
+RMSE=257.13, R2=0.2558
+Top 5 predictors: review_counts, sub_category, fulfillment_type, date_created, price
+sub_category rank: #2 of 14 (importance=0.1646) - IN top 5
+
+Models DISAGREE on whether sub_category is a top-5 predictor - treat the sub_category conclusion as model-dependent, not settled.
+-> If both agree it's not top-5, quantity_sold is driven mainly by product-level factors (reviews, listing age, price, images) rather than which category a product sits in - i.e. execution matters more than category choice.
+
+CAVEAT on review_counts (typically the #1 feature by a wide margin in both models):
+review_counts can only accumulate AFTER a product has been purchased, so it is mechanically correlated with quantity_sold rather than a controllable lever a seller can pull before selling. Treat it as a proxy/leakage-like feature: strong for prediction, weak for actionable strategy. For business recommendations, the more actionable levers are the next-ranked features (date_created, price, number_of_images, discount_rate, has_video, is_branded).
+
+R2 in the 0.26-0.26 range is modest - quantity_sold is heavy-tailed (std 298 vs mean 21.3), a handful of viral products drive most volume, which caps how well any tabular regression can fit without log-transforming the target or modeling top-sellers separately.

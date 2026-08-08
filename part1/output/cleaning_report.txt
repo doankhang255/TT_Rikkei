@@ -1,0 +1,56 @@
+=== Part 1.2: Data Cleaning & Preprocessing - Report ===
+
+Rows loaded (from merged_raw.csv): 41603
+fulfillment_type missing -> filled 'unknown': 0
+brand missing -> filled 'OEM' (per data dictionary, OEM = no brand): 0
+original_price < price rows -> original_price raised to price: 0
+Duplicate product ids across category files (kept, not dropped): 27
+Exact duplicate rows (same id + sub_category) dropped: 27
+Rows after cleaning: 41576
+
+--- sub_category row counts ---
+sub_category
+fashion_accessories    16005
+women_shoes             5917
+men_shoes               5744
+backpacks_suitcases     5359
+women_bags              4324
+men_bags                4227
+
+--- dtypes ---
+id                    int64
+name                    str
+description             str
+original_price      float64
+price               float64
+fulfillment_type        str
+brand                   str
+review_counts         int64
+rating_average      float64
+favorite_count        int64
+pay_later              bool
+current_seller          str
+date_created          int64
+number_of_images      int64
+vnd_cashback          int64
+has_video              bool
+category                str
+quantity_sold         int64
+sub_category            str
+discount_rate       float64
+is_branded             bool
+
+--- discount_rate / is_branded sample stats ---
+       discount_rate
+count   41576.000000
+mean        5.806004
+std        13.717713
+min         0.000000
+25%         0.000000
+50%         0.000000
+75%         0.000000
+max        88.570000
+
+is_branded
+False    31131
+True     10445
